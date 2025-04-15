@@ -1,0 +1,98 @@
+﻿<div class="slider-container">
+    <div class="slider">
+        <div class="slide active" style="background: linear-gradient(to right, #ff7e5f, #feb47b);">
+            <p class="slide-text">SkillFactory</p>
+        </div>
+        <div class="slide" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
+            <p class="slide-text">Добро пожаловать!</p>
+        </div>
+        <div class="slide" style="background: linear-gradient(to right, #43cea2, #185a9d);">
+            <p class="slide-text">LifeSpot</p>
+        </div>
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
+
+<style>
+    .slider-container {
+        position: relative;
+        max-width: 800px;
+        margin: 20px auto;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .slide {
+        min-width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        display: none;
+    }
+
+        .slide.active {
+            display: flex;
+        }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        padding: 10px;
+        font-size: 2em;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+</style>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    });
+
+    // Показываем первый слайд
+    showSlide(currentIndex);
+</script>
